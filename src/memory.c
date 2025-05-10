@@ -1,0 +1,20 @@
+#include <stdlib.h>
+#include "memory.h"
+
+void* reallocate(void* pointer, size_t oldSize, size_t newSize)
+{
+	if (newSize == 0)
+	{
+		// Deallocate
+		free(pointer);
+		return NULL;
+	}
+
+	// realloc expands the pointer's area if possible. If not possible, it will copy pointer and its data to a new area of the correct size
+	// If data is copied, realloc returns the new pointer
+	// Returns NULL if there is not enough memory
+	void* result = realloc(pointer, newSize);
+	if (result == NULL)
+		exit(1);
+	return result;
+}
