@@ -19,13 +19,13 @@ int disassembleInstruction(Chunk* chunk, int offset)
 	printf("%04d ", offset);
 
 	// Print line #
-	if (offset > 0 && chunk->lines[offset] == chunk->lines[offset - 1])
+	if (offset > 0 && getLineNumber(chunk, offset) == getLineNumber(chunk, offset - 1))
 	{
 		printf("	| ");
 	}
 	else
 	{
-		printf("%4d ", chunk->lines[offset]);
+		printf("%4d ", getLineNumber(chunk, offset));
 	}
 
 	// Print instruction
