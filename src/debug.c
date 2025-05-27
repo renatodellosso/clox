@@ -34,6 +34,8 @@ int disassembleInstruction(Chunk* chunk, int offset)
 	{
 	case OP_CONSTANT:
 		return constantInstruction("OP_CONSTANT", chunk, offset);
+	case OP_CONSTANT_LONG:
+		return longConstantInstruction("OP_CONSTANT_LONG", chunk, offset);
 	case OP_RETURN:
 		return simpleInstruction("OP_RETURN", offset);
 	default:
@@ -57,5 +59,21 @@ static int constantInstruction(const char* name, Chunk* chunk, int offset)
 	printValue(chunk->constants.values[constant]);
 	printf("'\n");
 
-	return offset + 2;
+	return offset + 2; // 2 for op code + constant
+}
+
+static int longConstantInstruction(const char* name, Chunk* chunk, int offset)
+{
+	int constant = 0;
+	for (int i = 1; i < 3; i++)
+	{
+		constant <<= 8;
+		constant += chunk->code[offset + i];
+	}
+
+	printf("%-16s %4d '", name, constant); // -16s is a 16-char, left-aligned string
+	printValue(chunk->constants.values[constant]);
+	printf("'\n");
+
+	return offset + 3; // 3 = op code + 2 bytes
 }

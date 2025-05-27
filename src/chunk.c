@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "chunk.h"
 #include "memory.h"
+#include <stdio.h>
 
 // No constructors in C
 void initChunk(Chunk* chunk)
@@ -40,4 +41,23 @@ int addConstant(Chunk* chunk, Value value)
 {
 	writeValueArray(&chunk->constants, value);
 	return chunk->constants.count - 1; // Use '.' since constants is not a pointer
+}
+
+void writeConstant(Chunk* chunk, Value value, int line)
+{
+	int constant = addConstant(chunk, value);
+
+	if (constant < 256)
+	{
+		writeChunk(chunk, OP_CONSTANT, line);
+		writeChunk(chunk, constant, line);
+	}
+	else
+	{
+		writeChunk(chunk, OP_CONSTANT_LONG, line);
+		for (int i = 1; i >= 0; i--)
+		{
+			writeChunk(chunk, (constant >> (8 * i)) & 0xff, line);
+		}
+	}
 }

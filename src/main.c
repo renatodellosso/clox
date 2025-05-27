@@ -7,12 +7,8 @@ int main(int argc, const char* argv[])
 	Chunk chunk;
 	initChunk(&chunk);
 
-	// Bytecode is CONSTANT CONSTANT_VALUE (ex: 00 23)
-	int constant = addConstant(&chunk, 1.2);
-	writeChunk(&chunk, OP_CONSTANT, 123);
-	writeChunk(&chunk, constant, 123);
-
-	writeChunk(&chunk, OP_RETURN, 123);
+	for (int i = 0; i < 264; i++)
+		writeConstant(&chunk, i, 0);
 
 	disassembleChunk(&chunk, "test chunk");
 
