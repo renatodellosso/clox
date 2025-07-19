@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "vm.h"
+#include "compiler.h"
 #include "debug.h"
 
 VM vm;
@@ -34,11 +35,10 @@ Value pop()
 	return *vm.stackTop;
 }
 
-InterpretResult	interpret(Chunk* chunk)
+InterpretResult	interpret(const char* source)
 {
-	vm.chunk = chunk;
-	vm.ip = chunk->code;
-	return run();
+	compile(source);
+	return INTERPRET_OK;
 }
 
 static InterpretResult run()
@@ -90,7 +90,7 @@ static InterpretResult run()
 			return INTERPRET_OK;
 		}
 		}
-}
+	}
 
 #undef READ_BYTE
 #undef READ_CONSTANT
