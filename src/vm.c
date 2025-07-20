@@ -37,8 +37,22 @@ Value pop()
 
 InterpretResult	interpret(const char* source)
 {
-	compile(source);
-	return INTERPRET_OK;
+	Chunk chunk;
+	initChunk(&chunk);
+
+	if (!compile(source, &chunk))
+	{
+		freeChunk(&chunk);
+		return INTERPRET_COMPILE_ERROR;
+	}
+
+	vm.chunk = &chunk;
+	vm.ip = vm.chunk->code;
+
+	InterpretResult	result = run();
+
+	freeChunk(&chunk);
+	return result;
 }
 
 static InterpretResult run()
@@ -65,7 +79,7 @@ static InterpretResult run()
 			printf("[ ");
 			printValue(*slot);
 			printf(" ]");
-		}
+}
 		printf("\n");
 		disassembleInstruction(vm.chunk, (int)(vm.ip - vm.chunk->code));
 #endif
@@ -90,7 +104,7 @@ static InterpretResult run()
 			return INTERPRET_OK;
 		}
 		}
-	}
+}
 
 #undef READ_BYTE
 #undef READ_CONSTANT
