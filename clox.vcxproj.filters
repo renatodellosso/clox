@@ -39,6 +39,9 @@
     <ClCompile Include="src\scanner.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\object.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\common.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\scanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
