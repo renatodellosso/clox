@@ -34,11 +34,13 @@ void initVM()
 {
 	resetStack();
 	vm.objects = NULL;
+	initTable(&vm.strings);
 }
 
 void freeVM()
 {
 	freeObjects();
+	freeTable(&vm.strings);
 }
 
 void push(Value value)
@@ -193,7 +195,7 @@ static InterpretResult run()
 			return INTERPRET_OK;
 		}
 		}
-	}
+}
 
 #undef READ_BYTE
 #undef READ_CONSTANT
