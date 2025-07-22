@@ -13,6 +13,7 @@ typedef	struct
 	uint8_t* ip; // uint8_t is a byte, so this points to the byte of bytecode that will be executed next
 	Value stack[STACK_MAX];
 	Value* stackTop; // Points to where the next value to be pushed will go
+	Table globals;
 	Table strings;
 	Obj* objects;
 } VM;
