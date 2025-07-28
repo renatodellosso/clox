@@ -150,6 +150,9 @@
     <ClInclude Include="src\value.h" />
     <ClInclude Include="src\vm.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="test.lox" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
