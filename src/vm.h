@@ -10,7 +10,7 @@
 
 typedef struct
 {
-	ObjFunction* function;
+	ObjClosure* closure;
 	uint8_t* ip;
 	Value* slots;
 } CallFrame;
@@ -24,6 +24,7 @@ typedef	struct
 	Value* stackTop; // Points to where the next value to be pushed will go
 	Table globals;
 	Table strings;
+	ObjUpvalue* openUpvalues;
 	Obj* objects;
 } VM;
 
