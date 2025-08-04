@@ -1,11 +1,8 @@
-fun outer() {
-  var x = "outside";
-  fun inner() {
-    print x;
-  }
-
-  return inner;
+fun a(val) {
+	return val + 1;
 }
 
-var closure = outer();
-closure();
+var x = 1;
+for (var i = 0; i < 150; i = i + 1) {
+	x = a(x);
+}
