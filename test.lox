@@ -1,8 +1,15 @@
-fun a(val) {
-	return val + 1;
+class CoffeeMaker {
+  init(coffee) {
+    this.coffee = coffee;
+  }
+
+  brew() {
+    print "Enjoy your cup of " + this.coffee;
+
+    // No reusing the grounds!
+    this.coffee = nil;
+  }
 }
 
-var x = 1;
-for (var i = 0; i < 150; i = i + 1) {
-	x = a(x);
-}
+var maker = CoffeeMaker("coffee and chicory");
+maker.brew();

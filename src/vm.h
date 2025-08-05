@@ -24,6 +24,7 @@ typedef	struct
 	Value* stackTop; // Points to where the next value to be pushed will go
 	Table globals;
 	Table strings;
+	ObjString* initString;
 	ObjUpvalue* openUpvalues;
 
 	size_t bytesAllocated;
